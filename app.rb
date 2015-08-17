@@ -1,32 +1,16 @@
 require 'sinatra'
+require 'sinatra/reloader'
+require 'active_record'
 
-before '/admin/*' do
-  @msg="admin area!"
+ActiveRecord::Base.establish_connection(
+  "adapter" => "sqlite3",
+  "database" => "./bbs.db"
+)
+
+class Comment < ActiveRecord::Base
 end
 
-before do
-  @author="taguchi"
-end
-
-after do
-  logger.info "page displayed successfullly"
-end
-
-helpers do
-  def strong(s)
-    "<strong>#{s}</strong>"
-  end
-end
-  
 get '/' do
-  @title="main index"
-  @content="main content by " + @author
+  @comments = Comment.order("id desc").all
   erb :index
-end
-
-get '/about' do
-  @title="about this page"
-  @content="this page is ... by " + strong(@author)
-  @email="taguchi@mail"
-  erb :about
 end

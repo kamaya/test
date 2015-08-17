@@ -1,9 +1,15 @@
 require 'sinatra'
 
-get '/' do
-  'hello world'
+=begin
+get '/hello/:name' do
+  "hello #{params[:name]}"
 end
 
-get '/about' do
-  'about this page site'
+get '/hello/:name' do |n|
+  "hello #{n}"
+end
+=end
+
+get '/hello/:fname/?:lname?' do |f, l|
+  "hello #{f} #{l}"
 end

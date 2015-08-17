@@ -1,5 +1,6 @@
 require 'sinatra'
 
-get '/' do
+get '/:name' do |n|
+  @name=n;
   erb :index
 end

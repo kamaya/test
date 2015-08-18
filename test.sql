@@ -1,0 +1,1 @@
+alter table comments add column name text;

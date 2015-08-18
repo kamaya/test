@@ -1,0 +1,1 @@
+alter table comments add column created_at;

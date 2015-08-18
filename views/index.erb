@@ -6,18 +6,23 @@
 </head>
 <body>
   <h1>BBS</h1>
-  <ul>
-    <% @comments.each do |comment| %>
-    <li data-id="<%= comment.id %>">
-      <%= h comment.body %>
-      <span class="deleteCmd" style="cursor:pointer;color:blue">[x]</span>
-    </li>
-    <% end %>
-  </ul>
+
   <h2>Add new</h2>
   <form method="post" action="/new">
-    <input type="text" name="body"> <input type="submit" value="post!">
+    名前<input type="text" name="name" placeholder="名無しさん">
+    <br>
+    コメント<input type="text" name="body"> <br>
+    <input type="submit" value="送信する">
   </form>
+
+  <ol reversed>
+    <% @comments.each do |comment| %>
+    <li data-id="<%= comment.id %>">
+      <font size="5"><%= h comment.body %> by <%= comment.name %> at <%= comment.created_at %></font>
+      <span class="deleteCmd" style="cursor:pointer;color:blue"> <font size="5">[x]</font></span>
+    </li>
+    <% end %>
+  </ol>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script>
